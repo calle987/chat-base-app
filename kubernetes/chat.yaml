@@ -24,7 +24,7 @@ spec:
       containers:
       - name: chat
         imagePullPolicy: IfNotPresent
-        image: chat1:latest
+        image: ghcr.io/calle987/chat:latest
         ports:
           - containerPort: 3000
             name: http-web-svc
