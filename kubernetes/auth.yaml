@@ -3,6 +3,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth
+  labels:
+    app: "auth"
 spec:
   selector:
     matchLabels:
@@ -14,11 +16,10 @@ spec:
     spec:
       containers:
       - name: auth
-        imagePullPolicy: IfNotPresent
         image: ghcr.io/calle987/auth:latest
         ports:
           - containerPort: 3000
-            name: http-web-svc
+            
 
 ---
 apiVersion: v1
