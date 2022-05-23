@@ -3,7 +3,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: chat
+  labels:
+    app: "chat"
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: chat
@@ -13,23 +16,22 @@ spec:
         app: chat
     spec:
       containers:
-      - name: chat
-        imagePullPolicy: IfNotPresent
-        image: ghcr.io/calle987/chat:latest
-        ports:
+        - name: chat
+          image: ghcr.io/calle987/chat:latest
+          ports:
           - containerPort: 3000
-            name: http-web-svc
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: static
+  name: "chat"
+  labels:
+    service: chat
 spec:
   selector:
     app: chat
   ports:
-  - name: static
-    protocol: TCP
-    port: 3000
-    targetPort: http-web-svc
+    - name: http
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
