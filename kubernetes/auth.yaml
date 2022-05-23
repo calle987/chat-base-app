@@ -25,12 +25,17 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: static
+  name: "auth"
+  labels:
+    service: auth
 spec:
   selector:
     app: auth
   ports:
-  - name: static
+  - name: http
+    protocol: TCP
+    port: 3000
+    targetPort: 3000
     protocol: TCP
     port: 3000
     targetPort: http-web-svc
